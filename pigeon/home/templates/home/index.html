@@ -1,55 +1,78 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-    {% load static %}
-    {% get_media_prefix as MEDIA_PREFIX %}
-
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=0"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-
-    <title>樂屋市場報表下載</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
-
-    <script type="text/javascript" charset="utf-8">
-    </script>
-
-    <style type="text/css">
-        body {
-            margin: 0;
-            padding: 0;
-            background: #ddd;
-        }
-
-        .market-page {
-            padding-top: 50px;
-        }
-
-        .log-panel {
-            margin: 10px 1px;
-            padding: 10px;
-            background: white;
-            text-align: center;
-        }
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js" integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <style>
+      .main_container{
+        margin-top: 30px;
+      }
+      .main_title {
+        text-align: center;
+        font-weight: bold;
+      }
+      .main_img {
+        overflow-clip-margin: content-box;
+        overflow: clip;
+        height: 300px;
+        object-fit: cover;
+      }
     </style>
-</head>
-<body>
-<div class="container market-page">
-
-</div>
-</body>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">成績公告</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="http://330071.com.tw" target="_blank"><strong>競翔成績 330071</strong></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://gn02729362.files.wordpress.com/2022/11/michael-chiara-vfcs834z4ps-unsplash.jpg" class="d-block w-100 main_img" alt="...">
+            </div>
+        </div>
+    </div>
+    <div class="container-lg main_container">
+        <h1 class="main_title">112年春季競翔成績公告</h1>
+        <div class="row">
+          <div class="col-sm-3 mb-3 mb-sm-0">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">全民海翔聯合會</h4>
+                <p class="card-text"></p>
+                <a href="#" class="btn btn-primary">看成績</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">3678聯合會</h4>
+                <p class="card-text"></p>
+                <a href="#" class="btn btn-primary">看成績</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3 mb-3 mb-sm-0">
+          </div>
+          <div class="col-sm-3">
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

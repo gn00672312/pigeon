@@ -1,0 +1,74 @@
+
+.btn {
+    position: relative;
+    margin: 0 auto;
+    font-size: 1.6rem;
+    font-weight: 600;
+    padding: 1rem;
+    box-shadow: 0 .2rem .6rem rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+}
+.btn_primary {
+    color: #fff;
+    background: rgb(0, 102, 153);
+}
+
+.btn_primary:active,
+.btn_primary:hover {
+    color: rgb(0, 102, 153);
+    background: #fff;
+    border: 1px solid rgb(0, 102, 153);
+}
+
+.btn_secondary {
+    color: rgb(0, 102, 153);
+    background-color: #fff;
+    border-color: transparent;
+}
+.btn_secondary:active,
+.btn_secondary:hover {
+    color: rgb(0, 102, 153);
+    border-color: rgb(0, 102, 153);
+}
+
+.btn:focus {
+    outline: none;
+}
+
+.btn_cancel {
+    color: #fff;
+    background-color: rgb(180, 180, 180);
+}
+.btn_cancel:hover {
+    background-color: #fff;
+    border-color: rgb(180, 180, 180);
+}
+
+.btn_small {
+    font-size: 1.6rem;
+    color: rgb(120, 120, 120);
+    background-color: #fff;
+    border-color: transparent;
+}
+.btn_small:active,
+.btn_small:hover {
+    color: rgb(222,63,2);
+    border-color: rgb(222,63,2);
+}
+
+/*個資聲明button*/
+.btn-personal{
+    position: absolute;
+    left: 160px;
+    padding: 0;
+    color: rgb(0, 102, 153);
+    background-color: transparent;
+    border: transparent;
+    z-index: 4;
+}

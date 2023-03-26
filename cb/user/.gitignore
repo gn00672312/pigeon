@@ -1,0 +1,10 @@
+**/*.pyc
+**/migrations/*
+**/*.log
+static/*
+cache/*
+**/__pycache__
+**/*.DS_Store
+/.coverage
+/.idea
+

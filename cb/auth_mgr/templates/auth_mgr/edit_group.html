@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+{% load i18n %}
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>{% block title %}{% trans '群組設定' %}{% endblock %}</title>
+
+<style type="text/css">
+
+body {
+    font-size: 12px;
+    margin: 20px 20px;
+}
+
+table {
+    width: 100%;
+    border: rgb(188,188,188) 1px solid;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    border-bottom: rgb(188,188,188) 1px solid;
+    border-top: rgb(188,188,188) 1px solid;
+    border-left: rgb(188,188,188) 1px solid;
+    font-size: 18px;
+    padding: 16px 20px;
+    color: rgb(112, 112, 112);
+    line-height: 32px;
+    letter-spacing: 0.65px;
+
+}
+
+td {
+    text-align: left;
+    color: rgb(112, 112, 112);
+    border-right: rgb(188,188,188) 1px solid;
+    padding: 12px 20px;
+    font-size: 18px;
+}
+
+button {
+    width: 300px;
+    margin: 20px 20px;
+    padding: 10px 10px;
+    font-size: 12px;
+    background-color: inherit;
+}
+
+.button_type {
+    width: 100%;
+    text-align: center;
+}
+
+.btn{
+    text-decoration: none;
+    color: rgb(112, 112, 112);
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: 0.65px;
+}
+
+.delete{
+    /* width: 100%; */
+    /* text-align: center; */
+    margin-left: 550px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+    {% if error %}
+        {{ error }}
+        <a href="{{ return_to }}">返回</a>
+    {% else %}
+    {% if message %}{{ message }}{% endif %}
+    <form action='' method='post'>
+        {% csrf_token %}
+        <input type='hidden' name="group_id" value='{% if group %}{{ group.id }}{% endif %}'/>
+        <table width="300" border="2">
+            <tr>
+                <td>{% trans 'Group Name' %}</td>
+
+                <td><input type='text' name='name' value='{% if group %}{{ group.name }}{% endif %}'/></td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <th width="50%">Group Member</th>
+                <th width="50%">Permission</th>
+            </tr>
+            <tr>
+                <td>
+                    {% for user in users %}
+                        <label for="user_id-{{ user.id }}">
+                            <input type="checkbox" class="input_check" id="user_id-{{ user.id }}" name="user_id-{{ user.id }}" {% if user.id in group.users %}checked="checked"{% endif %}>
+                                {{ user }}
+                        </label>
+                        <br>
+                    {% endfor %}
+                </td>
+
+                <td>
+                    {% for permission in permissions %}
+                        <label for='permission_id-{{ permission.id }}'>
+                            <input type='checkbox' class="input_check" id='permission_id-{{ permission.id }}' name='permission_id-{{ permission.id }}'
+                                {% if permission.id in group.permissions  %}checked="checked"{% endif %}>
+                                {{ permission.name }}
+                        </label>
+                            <br>
+                    {% endfor %}
+                </td>
+            </tr>
+        </table>
+        <div class="button_type">
+            <button class="btn" type="submit" value="Submit">確定</button>
+            <input type='hidden' name='return_to' value='{{return_to}}'/>
+            <button><a class="btn" href="{{ return_to }}">取消</a></button>
+        </div>
+    </form>
+    {% if group and group.id is not None%}
+    <form action="{% url 'cb_auth_mgr:delete_group' %}" method='post'>
+        {% csrf_token %}
+            <input type='hidden' name="group_id" value='{% if group %}{{ group.id }}{% endif %}'/>
+            <button class="btn delete" type="submit" value="'{% if group %}{{ group.id }}{% endif %}'">刪除群組</button>
+            <input type='hidden' name='return_to' value='{{return_to}}'/>
+    </form>
+
+    {% endif %}
+    {% endif %}
+</body>
+
+</html>

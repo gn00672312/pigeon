@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="designer" content="雲灣資訊有限公司,contact@cloudybay.com.tw" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta charset="UTF-8">
+    <link rel="icon" href="">
+    <title>{% block title %} Log Viewer {% endblock %}</title>
+
+</head>
+<style>
+.content_div {
+    width: 100%
+}
+.prefix {
+    color: #999;
+    font-style: italic;
+    font-size: 1em;
+}
+.msg {
+    padding-left: 32px;
+    font-size: 1.1em;
+}
+</style>
+<body>
+  <div class="content_div">
+      <div>
+        {% for cg in collects %}
+          {% if collect == cg %}
+          {{ collect }}&nbsp;
+          {% else %}
+          <a href="{{ query_path }}&collect={{ cg }}">{{ cg }}</a>&nbsp;
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div>
+            <form action="" method="get">
+                Top:<input type="text" size="8" name="top" value="{{ top }}"/>
+                Date:<input type="text" size="18" name="dt" value="{{ dt }}"/>
+                Keyword:<input type="text" size="40" name="q" value="{{ q }}"/>
+                <input type="hidden" name="collect" value="{{ collect }}"/>
+                <button type="submit">submit</button>
+            </form>
+      </div>
+      <hr/>
+      <table width="99%">
+          {% for msg in messages %}
+          <tr>
+              <td class="prefix">{{ msg.0|safe }}</td>
+          </tr>
+          <tr>
+            <td class="msg">{{ msg.1|safe }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+  </div>
+</body>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+{% load i18n %}
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>{% block title %}{% trans '使用者設定' %}{% endblock %}</title>
+
+<style type="text/css">
+body {
+    font-size: 12pt;
+    margin: 20pt 20pt;
+    color: rgb(112, 112, 112);
+    letter-spacing: 0.58px;
+    line-height: 30px;
+}
+table {
+    width: 1000pt;
+    border: rgb(188,188,188) 1pt solid;
+    border-collapse: collapse;
+
+}
+th {
+    text-align: left;
+    border-bottom: rgb(188,188,188) 1pt solid;
+    border-top: rgb(188,188,188) 1pt solid;
+    border-left: rgb(188,188,188) 1pt solid;
+    font-size: 16pt;
+    padding: 2pt 5pt;
+    letter-spacing: 0.65px;
+}
+td {
+    text-align: left;
+    border-right: rgb(188,188,188) 1pt solid;
+    padding: 3pt 5pt;
+    width: 170pt;
+    font-size: 16pt;
+}
+button {
+    width: 450pt;
+    margin: 20pt 20pt;
+    padding: 10pt 10pt;
+    font-size: 12pt;
+    background-color: inherit;
+}
+
+.btn {
+    cursor: pointer;
+}
+.input_text {
+    width: 830pt;
+    font-size: 14pt;
+    text-align: left;
+    padding: 3pt 10pt;
+    border: rgb(188,188,188) 1pt solid;
+    border-radius: 5pt;
+    margin: 2pt 5pt;
+}
+.input_check {
+    position: relative;
+    font-size: 30pt;
+}
+.button_type {
+    width: 1000pt;
+    text-align: center;
+}
+
+.delete{
+    margin-left: 350px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+    {% if error %}
+        {{ error }}
+        <a href="{{ return_to }}">返回</a>
+    {% else %}
+    {% if message %}{{ message }}{% endif %}
+
+    <form action='' method='post'>
+        {% csrf_token %}
+        <input type='hidden' name="user_id" value='{% if account %}{{ account.id }}{% endif %}'/></div>
+
+        <table>
+            <tr>
+                <th colspan="2">使用者資訊</th>
+            </tr>
+            <tr>
+                <td>{% trans 'UserID' %}</td>
+                <td><input type="text" class="input_text" name="username" value='{% if account %}{{ account.username }}{% endif %}'/></td>
+            </tr>
+            <tr>
+                <td>{% trans '姓' %}</td>
+                <td><input type="text" class="input_text" name="first_name" value="{% if account %}{{ account.first_name }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>{% trans '名' %}</td>
+                <td><input type="text" class="input_text" name="last_name" value="{% if account %}{{ account.last_name }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>{% trans '通訊email' %}</td>
+                <td><input type="text" class="input_text" name="email" value="{% if account %}{{ account.email }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>{% trans '密碼' %}</td>
+                <td><input type="password" class="input_text" name='password1' value=''/></td>
+            </tr>
+            <tr>
+                <td>{% trans '確認密碼' %}</td>
+                <td><input type="password" class="input_text" name='password2' value=''/></td>
+            </tr>
+            <tr>
+                <td>{% trans 'Is active' %}</td>
+                <td><input type="checkbox" class="input_check" name="is_active" {% if account.is_active %}checked="checked"{% endif %}></td>
+            </tr>
+            <tr>
+                <td>{% trans 'Is staff' %}</td>
+                <td><input type="checkbox" class="input_check" name="is_staff" {% if account.is_staff %}checked="checked"{% endif %}></td>
+            </tr>
+            <tr>
+                <td>{% trans 'Is superuser' %}</td>
+                <td><input type="checkbox" class="input_check" name="is_superuser" {% if account.is_superuser %}checked="checked"{% endif %}></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>群組</th>
+            </tr>
+            <tr>
+                <td>
+                    {% for group in groups %}<label for='group_id-{{ group.id }}'><input type='checkbox' class="input_check" id='group_id-{{ group.id }}' name='group_id-{{ group.id }}' {% if group.id in account.groups %}checked="checked"{% endif %}>{{ group.name }}<br></label>{% endfor %}
+                </td>
+            </tr>
+
+        </table>
+        <div class="button_type">
+            <button type="submit" class="btn" value="Submit">確定</button>
+            <button type="button" class="btn" onClick="window.location.href = '{{ return_to }}'">
+                取消
+            </button>
+        </div>
+
+    </form>
+        {% if account and account.id is not None %}
+        <form action="{% url 'pigeon_auth_mgr:delete_user' %}" method='post'>
+            {% csrf_token %}
+            <input type='hidden' name="user_id" value='{% if account %}{{ account.id }}{% endif %}'/></div>
+            <input type='hidden' name='return_to' value='{{return_to}}'/>
+            <button class="btn delete" type="submit" value="delete">刪除</button>
+        </form>
+        {% endif %}
+    {% endif %}
+
+</body>
+
+</html>

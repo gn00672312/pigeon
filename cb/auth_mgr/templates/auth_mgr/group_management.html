@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+{% load i18n %}
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>{% block title %}{% trans '群組權限管理' %}{% endblock %}</title>
+
+<style type="text/css">
+
+.table {
+    display: table;
+    border-collapse: collapse;
+    border:solid 1px black;
+    width: 90%;
+    min-width: 600px;
+}
+
+.row {
+    display: table-row;
+}
+
+.disactive {
+    color: #ccc;
+    font-style: italic;
+}
+
+/* td , th */
+.cell {
+    display: table-cell;
+    border:solid 1px rgb(188,188,188);
+    border-radius: 5px;
+    background:#fff;
+    padding: 10px 20px;
+    letter-spacing: 0.58px;
+    line-height: 32px;
+    color: rgb(112, 112, 112);
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.info{
+    /* position: relative; */
+    text-decoration: none;
+    color: rgb(112,112, 112);
+    font-weight: normal;
+}
+
+.info a:hover{
+    color: blue;
+}
+
+.auth_manager{
+    margin-right: 20px;
+    color: rgb(112, 112, 112);
+    font-size: 28px;
+    letter-spacing: 1px;
+    line-height: 36px;
+    font-weight: bold;
+}
+
+.bg_color_user{
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    color:rgb(112, 112, 112);
+    border: 1px solid rgb(112, 112, 112);
+    line-height: 30px;
+    font-size: 20px;
+    text-decoration: none;
+    padding: 5px 24px;
+}
+
+.bg_color_group{
+    border-radius: 5px;
+    background-color: rgb(112, 112, 112);
+    color:rgb(255, 255, 255);
+    border: 1px solid rgb(112, 112, 112);
+    line-height: 30px;
+    font-size: 20px;
+    text-decoration: none;
+    padding: 5px 24px;
+}
+
+
+
+.bg_color:hover, .bg_color a:hover, .bg_color:focus, .bg_color:visited {
+    color: rgb(255, 255, 255);
+    background-color:rgb(112, 112, 112);
+}
+
+.mg_bottom{
+    margin-bottom: 8px;
+}
+.add_group{
+    border-radius: 5px;
+    border: 1px solid rgb(188, 188, 188);
+    text-decoration: none;
+    padding: 4px 24px;
+    font-family: normal;
+    font-size: 16px;
+    color: rgb(112, 112, 112);
+    background-color: rgb(255, 255, 255);
+}
+
+
+</style>
+
+</head>
+
+<body>
+    <div>
+        <span class="auth_manager">權限管理</span>
+        <a class="bg_color_user" href="{% url 'cb_auth_mgr:user_management' %}">User</a>
+        <a class="bg_color_group" href="{% url 'cb_auth_mgr:group_management' %}">Group</a>
+    </div>
+    <hr>
+    <div class="mg_bottom">
+        <a class="add_group" href="{% url 'cb_auth_mgr:create_group' %}">＋新增群組</a>
+    </div>
+    <div class="table">
+        <div class="row">
+            <div class="cell">{% trans 'Group name' %}</div>
+            <div class="cell">{% trans 'Member' %}</div>
+        </div>
+        {% for group in groups %}
+            <div class="row">
+                <div class="cell info"><a class="info" href="{% url 'cb_auth_mgr:modify_group' group.id %}?return_to={{return_to}}">{{ group.name }}</a></div>
+                <div class="cell info">{% for user in group.user_set.all %}{{user}} {% endfor %}</div>
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+
+</html>

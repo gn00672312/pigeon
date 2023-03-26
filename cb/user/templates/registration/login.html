@@ -1,0 +1,59 @@
+{% load i18n %}
+{% load static %}
+<!-- templates/registration/login.html -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="{% static 'js/bootstrap/css/bootstrap.min.css' %}" /> -->
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/console/typography.css' %}" />
+    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/console/section.css' %}" /> {% endcomment %}
+    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/console/animate.css' %}" /> {% endcomment %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/console/button.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/console/input.css' %}" />
+    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/console/dialog.css' %}" /> {% endcomment %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/console/all.css' %}" />
+    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/console/footer.css' %}" /> {% endcomment %}
+    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'font_icon/style.css' %}" /> {% endcomment %}
+
+<style type="text/css">
+  .heading_secondary{
+    margin-top:10%;
+  }
+
+  .btn_primary{
+    width:100%;
+  }
+
+  #message {
+    color: #ff0000;
+    padding-bottom: 0.5rem;
+  }
+
+</style>
+
+
+<h2 class="heading_secondary">Login</h2>
+<main>
+    <section class="section">
+        <div class="container">
+            <div class="control-group">
+                <form id="form_login" action="" method="post">
+                    {% csrf_token %}
+                    <p id="message" class="control-label">
+                    {% if form.errors %}
+                    {% trans '帳號或密碼錯誤，請重新輸入' %}
+                    {% endif %}
+                    </p>
+                    <label class="control-label">帳號</label>
+                    <input type="text" name="username" id="username" class="input_line_type u-bottom-M">
+
+                    <label class="control-label">密碼</label>
+                    <input type="password" name="password" id="password" class="input_line_type">
+
+                    <button class="col-xs-12 btn btn_primary u-text-m" type="submit">登入</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+</form>
