@@ -1,0 +1,12 @@
+**/*.pyc
+**/migrations/*
+**/*.log
+static/*
+logfiles/*
+cache/*
+conf/dev/*
+/env.py
+**/__pycache__
+**/*.DS_Store
+/.coverage
+/.idea

@@ -1,0 +1,206 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/log/base.css' %}">
+    <link rel="icon" href="">
+    {% block title %}<title> Log Viewer </title>{% endblock %}
+
+</head>
+<style>
+body{
+  margin: 0;
+  box-sizing: border-box;
+}
+.content_div {
+  width: 100%;
+  margin: 0 auto;
+  font-size :16px;
+}
+.prefix {
+    color: #999;
+    font-style: italic;
+    font-size: 1em;
+}
+.msg {
+    padding-left: 32px;
+    font-size: 1.1em;
+}
+
+.block {
+  display: inline-block;
+  text-decoration: none;
+  margin: 5px;
+  padding: 6px;
+  color: rgb(60, 60, 60);
+  background: rgb(255, 255, 255);
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 30px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.16);
+  line-height: 1;
+  font-weight: 500;
+}
+
+.has_clicked {
+  background: rgb(255, 196, 0);
+}
+
+.menu_container{
+  margin: 20px;
+}
+
+.select_container {
+  margin: 10px;
+}
+
+.selected_title {
+  font-size: 16px;
+  color: rgb(60, 60, 60);
+  font-weight: 500
+}
+
+.submit {
+  font-size: 14px;
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 30px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.16);
+  color: rgb(60, 60, 60);
+  font-weight: 500
+}
+
+.input_text{
+  font-size: 16px;
+  border: 1px solid rgb(237, 237, 237);
+  border-radius: 5px;
+}
+
+.line{
+  border: 0.5px solid #DDDDDD;
+}
+</style>
+
+<script >
+function parse_date(dt_str) {
+  let format = "(\\d{4})-(\\d{2})-(\\d{2})"
+  var _reg = new RegExp(format)
+  if (dt_str.length > 0) {
+    _rs = dt_str.match(_reg)
+    if (_rs) {
+      try {
+          let new_dt = new Date()
+          new_dt.setFullYear(_rs[1])
+          new_dt.setMonth(_rs[2] - 1, _rs[3])
+          return new_dt
+      }
+      catch (e) {
+        return Number.NaN
+      }
+    }
+  }
+}
+
+function format_date(dt) {
+  let mon = dt.getMonth() + 1
+  if (mon < 10) { mon = "0" + mon } else { mon = "" + mon }
+  let day = dt.getDate()
+  if (day < 10) { day = "0" + day } else { day = "" + day }
+  return `${dt.getFullYear()}-${mon}-${day}`
+}
+
+function to_day() {
+  let input = document.getElementById("dt")
+  input.value = ""
+  document.getElementById("logform").submit()
+}
+
+function back_day() {
+  let input = document.getElementById("dt")
+  let dt = parse_date(input.value)
+  if (dt == Number.NaN) {
+    return
+  }
+
+  dt_value = dt.valueOf()
+  dt_value -= (24 * 60 * 60 * 1000)
+  input.value = format_date(new Date(dt_value))
+
+  document.getElementById("logform").submit()
+}
+
+function next_day() {
+  let input = document.getElementById("dt")
+  let dt = parse_date(input.value)
+  if (dt == Number.NaN) {
+    return
+  }
+
+  dt_value = dt.valueOf()
+  dt_value += (24 * 60 * 60 * 1000)
+  input.value = format_date(new Date(dt_value))
+
+  document.getElementById("logform").submit()
+}
+
+</script>
+
+<body>
+  <div class="content_div">
+    <header>
+        <img onclick="location.href='{% block url_home %}{% endblock %}'" class="header_left_btn" src="{% static 'imgs/home.png' %}" alt="home">
+        <div class="title">
+            作業紀錄監控
+        </div>
+    </header>
+    <div class="menu_container">
+      {% for collect in collects %}
+        {% if selected_collect == collect.0 %}
+          <span class="block has_clicked">{{ collect.1 }}</span>
+        {% else %}
+          <a class="block" href="{{ query_path }}&selected_collect={{ collect.0 }}">{{ collect.1 }}</a>&nbsp;
+        {% endif %}
+      {% endfor %}
+    </div>
+    <hr class="line">
+    <div class="select_container">
+          <form id="logform" action="" method="get">
+              <span class="selected_title">Top:  </span>
+                <input class="input_text" type="text" size="8" name="top" value="{{ top }}"/>
+
+              &nbsp;&nbsp;
+
+              <span class="selected_title">Date:  </span>
+              <span class="selected_title">
+                <a href="javascript:back_day()">&lt;&lt;</a>
+                <a href="javascript:to_day()">Today</a>
+                <a href="javascript:next_day()">&gt;&gt;</a>
+              </span>
+              <input id="dt" class="input_text" type="text" size="18" name="dt" value="{{ dt }}"/>
+              <input id="time_range" class="input_text" type="text" size="18" name="time_range" value="{{ time_range }}"/>
+
+              &nbsp;&nbsp;
+
+              <span class="selected_title">Keyword:  </span>
+                <input class="input_text" type="text" size="40" name="q" value="{{ q }}"/>
+
+              <input type="hidden" name="selected_collect" value="{{ selected_collect }}"/>
+              <button class="submit" type="submit">submit</button>
+          </form>
+    </div>
+    <hr class="line">
+    <table width="99%">
+        {% for msg in messages %}
+        <tr>
+            <td class="prefix">{{ msg.0 }}</td>
+        </tr>
+        <tr>
+          <td class="msg">{{ msg.1|safe }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+</body>
