@@ -1,7 +1,6 @@
 **/*.pyc
 **/*.log
 static/*
-logfiles/*
 cache/*
 conf/dev/*
 **/__pycache__
