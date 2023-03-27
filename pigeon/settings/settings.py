@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'django_extensions',
 
     'cb.user',
+    'cb.auth_mgr',
 
     # your app here
     'pigeon',
@@ -117,3 +118,6 @@ DATA_ROOT = BASE_DIR + '/data'
 FORCE_SCRIPT_NAME = ''
 STATIC_URL = FORCE_SCRIPT_NAME + '/static/'
 MEDIA_URL = FORCE_SCRIPT_NAME + '/media/'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
