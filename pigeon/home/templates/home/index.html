@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -26,7 +27,7 @@
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="{% url "home:home" %}">成績公告</a>
+        <a class="navbar-brand" href="{% url 'home:home' %}">成績公告</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -40,11 +41,11 @@
         {% if request.user.id %}
         <span class="navbar-text" style="padding-right: 10px;">您好, {{ request.user.first_name }} {{ request.user.last_name }}</span>
         <div class="d-flex">
-          <a class="btn btn-sm btn-outline-secondary" href="{% url "user_logout" %}">登出</a>
+          <a class="btn btn-sm btn-outline-secondary" href="{% url 'user_logout' %}">登出</a>
         </div>
         {% else %}
         <div class="d-flex">
-          <a class="btn btn-sm btn-outline-secondary" href="{% url "user_login" %}">登入</a>
+          <a class="btn btn-sm btn-outline-secondary" href="{% url 'user_login' %}">登入</a>
         </div>
         {% endif %}
       </div>
@@ -52,7 +53,7 @@
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="https://gn02729362.files.wordpress.com/2022/11/michael-chiara-vfcs834z4ps-unsplash.jpg" class="d-block w-100 main_img" alt="...">
+                <img src="{% static 'img/home/pigeon-unsplash.jpg' %}" class="d-block w-100 main_img" alt="...">
             </div>
         </div>
     </div>
@@ -64,7 +65,7 @@
               <div class="card-body">
                 <h4 class="card-title">全民海翔聯合會</h4>
                 <p class="card-text"></p>
-                <a href="{% url "home:score_quanmin" %}" class="btn btn-primary">看成績</a>
+                <a href="{% url 'home:score_quanmin' %}" class="btn btn-primary">看成績</a>
               </div>
             </div>
           </div>
@@ -73,7 +74,7 @@
               <div class="card-body">
                 <h4 class="card-title">3678聯合會</h4>
                 <p class="card-text"></p>
-                <a href="{% url "home:score_3678" %}" class="btn btn-primary">看成績</a>
+                <a href="{% url 'home:score_3678' %}" class="btn btn-primary">看成績</a>
               </div>
             </div>
           </div>
