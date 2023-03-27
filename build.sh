@@ -4,5 +4,6 @@ set -o errexit
 
 poetry install
 
+python init_env.py
 python manage.py collectstatic --no-input
 python manage.py migrate
