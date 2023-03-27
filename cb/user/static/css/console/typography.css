@@ -58,7 +58,20 @@
 
 @media screen and (min-width: 992px) {
     .heading_secondary {
-      font-size: 3.6rem;
+      font-size: 5.4rem;
+    }
+
+    .bod_m {
+      top: -3rem;
+    }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 992px) {
+    .heading_secondary {
+      font-size: 5.4rem;
+    }
+    .control-label, .u-text-m {
+        font-size: 3.6rem;
     }
 
     .bod_m {
