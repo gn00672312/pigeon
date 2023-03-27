@@ -1,0 +1,82 @@
+/*CWAF基層css以手機版為主*/
+html {
+    font-size: 62.5%;
+  }
+
+  body {
+    font-family: "Noto Sans TC","Microsoft JhengHei UI","Microsoft JhengHei","Apple LiGothic Medium","Segoe UI",
+    "Segoe UI Web Regular","Segoe UI Symbol","Helvetica Neue",
+    "BBAlpha Sans","S60 Sans",Arial,sans-serif;
+    line-height: 1.5;
+    letter-spacing: .09rem;
+    color: rgb(90, 90, 90);
+  }
+
+  ol, ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  a, a:focus, a:hover, a:active, input:focus, select:focus {
+    text-decoration: none;
+    outline: none;
+  }
+  a, input {
+    cursor: pointer;
+  }
+
+  .container:before {
+    display: none;
+  }
+
+  .container:after {
+    display: none;
+  }
+
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .u-bottom-XS {
+    margin-bottom: 1.6rem;
+  }
+  .u-bottom-S {
+    margin-bottom: 2rem;
+  }
+  .u-bottom-M {
+    margin-bottom: 4rem;
+  }
+
+  .u-top-S {
+    margin-top: 2rem;
+  }
+
+  .u-top-M {
+    margin-top: 4rem;
+  }
+
+  .u-margin-xs {
+    margin: .3rem 0;
+  }
+
+  .u-text_center {
+    text-align: center;
+  }
+
+  .u-align_center-X {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .u-align_center-Y {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .u-align_center-XY {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
