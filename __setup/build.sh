@@ -6,5 +6,7 @@ pip install -r ./__setup/requirements.txt
 
 python init_env.py
 
+python ./scripts/timedrived.py -d
+
 python manage.py collectstatic --no-input
 python manage.py migrate

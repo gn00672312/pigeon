@@ -20,8 +20,6 @@ from django.conf.urls import include
 from django.contrib import admin
 
 from pigeon.home import urls as home
-from pigeon.auth_mgr import urls as pigeon_auth_mgr
-from pigeon.console import urls as console
 
 from cb.user.views import LoginView
 from cb.user.views import LogoutView
@@ -30,10 +28,7 @@ from cb.user import urls as user
 
 urlpatterns = [
     path('', include(home)),
-
-    path('console/', include(console)),
-    path('console/admin/', admin.site.urls),
-    path('console/pigeon_auth_mgr/', include(pigeon_auth_mgr)),
+    path('admin/', admin.site.urls),
 
     path('user/login/', LoginView.as_view(template_name='registration/login.html'), name='user_login'),
     path('user/logout/', LogoutView.as_view(), name='user_logout'),

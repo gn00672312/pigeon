@@ -46,13 +46,11 @@ INSTALLED_APPS = (
     'django_extensions',
 
     'cb.user',
-    'cb.auth_mgr',
+    # 'cb.auth_mgr',
 
     # your app here
     'pigeon',
     'pigeon.home.apps.HomeConfig',
-    'pigeon.auth_mgr.apps.AuthMgrConfig',
-    'pigeon.console.apps.ConsoleConfig',
 )
 
 MIDDLEWARE = [
@@ -136,3 +134,5 @@ if not DEBUG:
     # Turn on WhiteNoise storage backend that takes care of compressing static files
     # and creating unique names for each version so they can safely be cached forever.
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+FUNC_PERMISSION_CONFIG = os.path.join(os.environ.get('CONF'), 'func_permission.conf')
