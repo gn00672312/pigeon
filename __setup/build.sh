@@ -6,7 +6,5 @@ pip install -r ./__setup/requirements.txt
 
 python init_env.py
 
-cat .env
-
 python manage.py collectstatic --no-input
 python manage.py migrate
